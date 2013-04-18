@@ -5,6 +5,12 @@ A scheme like language (Dedi Programming Language), it includes a very basic par
 
 For now, variables, parameters and functions are created and used globally
 
+To use:  
+    dedi filename.dd
+Or  
+    import interpreter
+    interpreter.interpret(text)
+
 examples:  
 
 * *;(pr (+ 5 (+ 2 4)))*
