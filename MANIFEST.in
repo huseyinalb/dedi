@@ -1,2 +1,1 @@
 recursive-include dedi *.py
-recursive-include bin dedi

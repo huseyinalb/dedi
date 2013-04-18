@@ -1,0 +1,5 @@
+#!/usr/bin/env
+from dedi import interpreter
+import sys
+if __name__ == "__main__":
+    interpreter.interpret_file(sys.argv[1])
