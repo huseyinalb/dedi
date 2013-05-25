@@ -7,8 +7,11 @@ patterns = [('\(', 'OPAR'),
             ('"[^"]*"', 'STR'),
             ]
 
+
 def lex(text):
-    return[i for i in re.findall('('+ '|'.join([i[0] for i in patterns]) +')',text)]
+    return[i for i in re.findall(
+        '(' + '|'.join([i[0] for i in patterns]) + ')', text)]
+
 
 def identify(lexam):
     for pattern in patterns:
@@ -17,13 +20,16 @@ def identify(lexam):
                 lexam = int(lexam)
             return lexam, pattern[1]
 
+
 def tokenize(lexams):
     for i in lexams:
         yield identify(i)
 
+
 class TreeMaker():
     def __init__(self, tokens):
         self.tokens = tokens
+
     def create_node(self):
         children = []
         for i in self.tokens:

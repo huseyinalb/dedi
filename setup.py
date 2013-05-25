@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from distutils.core import setup
-from setuptools import find_packages
 
 setup(
     name='dedi',
@@ -14,4 +13,3 @@ setup(
     description='A scheme like pet language project',
     zip_safe=False,
 )
-

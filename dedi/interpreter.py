@@ -1,32 +1,37 @@
 import operator
 from parser import make_tree
 
+
 class Interpreter():
     def __init__(self):
         self.funcs = {
             '+': operator.add,
             '*': operator.mul,
             'pr': self.pr,
-            'sum':self.list_sum,
-            'l':self.l,
-            'h':operator.itemgetter(0),
-            'la':self.la,
-            'lu':self.lu
-            }
+            'sum': self.list_sum,
+            'l': self.l,
+            'h': operator.itemgetter(0),
+            'la': self.la,
+            'lu': self.lu
+        }
         self.defined_funcs = {
         }
         self.variables = {
         }
         self.level = 0
+
     def parse_params(self, param_tokens):
         return [param_token[1] for param_token in param_tokens]
+
     def get_var(self, varname, params={}):
         if params.get(varname, False):
             value = params.get(varname)
         elif self.variables.get(varname, False):
             value = self.variables.get(varname)[0]
         else:
-            sys.stderr.write('Variable ' + varname + ' is not defined in parameters or variables')
+            sys.stderr.write('Variable '
+                             + varname
+                             + ' is not defined in parameters or variables')
             raise ValueError()
         return value
 
@@ -78,23 +83,31 @@ class Interpreter():
             return
         callparams = self.fill_params(tree, {})
         return self.funcs.get(tree[0][0])(*callparams)
+
     def add(self, a, b):
         return a + b
+
     def mul(self, a, b):
         return a * b
+
     def pr(self, a):
         print(a)
+
     def list_sum(self, l):
         return reduce(operator.add, l)
+
     def l(self, *args):
         return list(args)
+
     def lu(self, *args):
         result = []
         for i in args:
             result += i
         return result
+
     def la(self, l, *args):
         return l + list(args)
+
 
 def interpret(text):
     tree = make_tree(text)
@@ -104,12 +117,14 @@ def interpret(text):
     for layer1_func in tree:
         interpreter.interpret(layer1_func, {})
 
+
 def interpret_file(filename):
     #print sys.argv
     f = open(filename, 'r')
     text = f.read()
     f.close()
     interpret(text)
+
 
 def test():
     interpret('(pr (+ 5 (+ 2 4)))')
